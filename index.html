@@ -1,0 +1,423 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <style>
+        body{
+            background-color:rgb(255, 255, 255);
+            font-family:Montserrat;
+        }
+        .menu{
+            position:fixed;
+            z-index:4;
+            bottom:0;
+            top:0;
+            width:100%;
+            height: 70px;
+            color:#4d4f54;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .container{
+            position:relative;
+            height:100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .logo{
+            width: calc(14.925% + 70px);
+            height: 70px;
+            text-align: left;
+            line-height: 46px;
+            position: absolute;
+            z-index: 2;
+            left: 0;
+        }
+        .logo a{
+            max-width: 100%;
+            min-width: 70px;
+            display: inline-block;
+            height: 100%;
+            table-layout:fixed;
+            vertical-align: middle;
+            text-decoration: none;
+        }
+        .me-logo{
+            margin-top: 25px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-right: 17px;
+            padding-left: 17px;
+            display: block;
+            width:100%;
+        }
+        img{
+            display: inline-block;
+            max-width:100%;
+            height:100%;
+            vertical-align: middle;
+        }
+        .grid-row{
+            display: block;
+            position: absolute;
+            top:0;
+            left: 0;
+            width:100%;
+            height:100%;
+        }
+        .col-md-2{
+            width: 16.66667%;
+            border-color: #edf5f8;
+        }
+        .nav-list{
+            display:table;
+            width: 100%;
+            height:70px;
+            padding:0;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .nav-list > li {
+            display: inline-block;
+            margin-bottom: 0;
+            padding-top: 31px;
+            -webkit-transition: background-color 0s ease .3s;
+            transition: background-color 0s ease .3s;
+            vertical-align: top;
+        }
+        .menu-item{
+            width: 16.66667%;
+            margin-top: 15px;
+        }
+        .number{
+            color:#c2c2c2;
+        }
+        main{
+            height:inherit;
+            padding-top: 0;
+            position:relative;
+            z-index: 2;
+            min-height: 100%;
+        }
+        .main-scroll{
+            height: 100%;
+            padding-top: 400px;
+            padding-bottom: 100px;
+            margin-top: 0;
+        }
+        .preview-images{
+            left: 0;
+            width: 100%;
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            height: 100%;
+            transition: ease;
+        }
+        .preview-images-item{
+            left:40%;
+            width:50%;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        .preview-images-item img{
+            left: -1px;
+            position: absolute;
+            top: 0;
+            display: block;
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+        .animate-wrap{
+            position: absolute;
+            top: 0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .animate-box-top, .animate-box-bot {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            -webkit-transition: -webkit-transform .0s ease;
+            transition: -webkit-transform .0s ease;
+            transition: transform .0s ease;
+            transition: transform .0s ease, -webkit-transform .0s ease;
+            overflow: hidden;
+}
+        .animate-box-top > div, .animate-box-bot > div {
+            width: 33.333%;
+            height: 100%;
+            float: left;
+            opacity: 0;
+        }
+        main > .row {
+            height: inherit;
+        }
+        .row .col-md-10{
+            width:83.33333%;
+            padding-left: 40px;
+        }
+        .preview-arrow{
+            position: absolute;
+            width: 20%;
+            z-index: -1;
+        }
+        .project-preview-arrow {
+            bottom: 0;
+            left: 50%;
+            -webkit-transform: rotate(-90deg) translateY(50%);
+            transform: rotate(-90deg) translateY(50%);
+            -webkit-transform-origin: left bottom;
+            transform-origin: left bottom;
+            min-width: 150px;
+            top: 150px;
+            margin-top: 30px;
+        }
+        .project-preview-arrow span{
+            fill: #a9acb5;
+            color: #a9acb5;
+        }
+        .project-preview-arrow span:nth-child(1) {
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+            overflow: hidden;
+            margin-right: 5px;
+        }
+        .project-preview-arrow svg {
+            display: block;
+            width: 50px;
+            -webkit-animation: project-arrow 2.2s ease-in infinite;
+            animation: project-arrow 2.2s ease-in infinite;
+        }
+        .grid-bg{
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+        }
+        .grid-bg > div {
+            border-right: 3px solid #edf5f8;
+            height: 100%;
+        }
+        .project-preview{
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.0001);
+        }
+        .project-preview .project-item-active{
+            display: table;
+        }
+        .project-preview .project-item{
+            padding: 30px 0;
+        }
+        .display-table{
+            width: 100%;
+            height:inherit;
+        }
+        .project-preview .projects-item .display-table-cell {
+            padding-top: 12%;
+            vertical-align: top;
+        }
+        .display-table-cell{
+            display: table-cell;
+        }
+        .row-col-10 > .col-md-2 {
+            width: 20%;
+        }
+        .project-count > span:first-child{
+            overflow:hidden;
+        }
+        .project-count > span{
+            color: #a9acb5;
+            display: inline-block;
+            vertical-align: bottom;
+        }
+        .projects-item-animate .project-count-number {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+            -webkit-animation: project-count 0.4s forwards;
+            animation: project-count 0.4s forwards;
+        }
+        .row-col-10 > .col-md-4 {
+            width: 40%;
+        }
+        iframe {
+            position: fixed;
+            width: 30vw;
+            
+            height:200px;
+            top: 150px;
+            right: 52vw;
+            z-index: 10;
+        }
+        .project-count-number{
+            font-size: 50pt;
+            font-weight: bolder;
+        }
+        .row-col-10 > .col-xs-5 {
+            font-weight: bold;
+            color: #a9acb5;
+            font-size: 20pt;
+        } 
+        audio{
+            margin-left: 30px;
+            margin-bottom: 200px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <header class="menu">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="me-logo">
+                        <img src="img/logo.png">
+                    </span>
+                </a>
+            </div>
+            
+            <nav class="row">
+                <div class="grid-row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                </div>
+            
+            </nav>
+            <ol id="menu-1" class="nav-list">
+            <li class="menu-item">
+                <span class="number">01</span>
+                <span>PROJECTS</span>
+            </li>
+            <li class="menu-item">
+                <span class="number">02</span>
+                <span>ABOUT</span>
+            </li>
+            <li class="menu-item">
+                <span class="number">03</span>
+                <span>BLOG</span>
+            </li>
+            </ol>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-scroll">
+            <div class="preview-images">
+                <div class="preview-images-item">
+                    <img src="img/somm2.jpg" alt class="project-1">
+                    
+                    <div class="animate-wrap">
+                        <div class="animate-box-bot">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="animate-box-top">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="preview-arrow">
+                        <span class="project-preview-arrow">
+                            
+                            
+                            
+                        </span>
+                    </div>
+                    <div class="project-preview" tabindex="0">
+                        <div class="display-table">
+                            <div class="display-table-cell">
+
+                                <div class="row-col-10"
+                                     id="project-1">
+                                    <div class="col-xs-5 col-sm-5 col-md-2 project-count">
+                                        <span class="project-count-number">1</span>
+                                        /
+                                        <span class="project-count-number-denominator">5</span>
+                                    </div>
+                                    <div class="col-xs-7 col-sm-6 col-md-4 no-padding">
+                                        <div class="content">
+                                            <article>
+
+                                                <div class="preview-article-header">
+                                                    <h2>
+                                                        Somm
+                                                    </h2>
+                                                </div>
+                                                <div class="preview-article-text">
+                                                    <div class="preview-text-content">
+                                                        <p>
+                                                            This is a digital experience which provide an interactive data visualization wine table that help users choose their wines in the wine festival, and share their reviews with other users. </p>
+                                                    </div>
+                                                </div>
+
+                                                <a class="tmp-class open-full-post" data-action="open-full-post"
+                                                   data-post="project-1"
+                                                   href="#"><span>Show Project</span></a>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-bg">
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
+        </div>
+
+        <audio controls src="img/wine.mp3"></audio>
+
+        <iframe src="https://player.vimeo.com/video/516616543?h=a7d65c8597&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
+
+
+    </main>
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>
